@@ -31,8 +31,8 @@ MedLex is an intelligent medicine assistant that helps users identify and unders
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/medlex.git
-cd medlex
+git clone https://github.com/Thorne-Musau/medbot2.0.git
+cd medbot
 ```
 
 2. Install dependencies:

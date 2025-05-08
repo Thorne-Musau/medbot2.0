@@ -1,0 +1,136 @@
+MedBot - AI-Powered Medical Assistant
+====================================
+
+Project Overview
+---------------
+MedBot is an advanced AI-powered medical assistant that provides intelligent health information and analysis. The system combines multiple AI models to deliver accurate, explainable, and user-friendly medical information while maintaining transparency in its decision-making process.
+
+Key Features
+-----------
+1. Multi-Model AI Integration
+   - OpenAI GPT-3.5 Turbo for primary responses
+   - Google Gemini 1.0 Pro as first fallback
+   - Together AI (Llama) as second fallback
+   - Ensures high availability and reliability
+
+2. Explainable AI (X-AI)
+   - Transparent decision-making process
+   - Confidence scoring for predictions
+   - Detailed factor analysis with weights
+   - Clear reasoning explanations
+   - Explicit limitation disclosures
+
+3. Intelligent Health Analysis
+   - Symptom-based disease prediction
+   - Evidence-based medical information
+   - Structured response format
+   - Follow-up question capability
+   - Context-aware responses
+
+4. User-Centric Features
+   - Personalized responses based on user settings
+   - Adjustable clarity levels
+   - Multi-language support
+   - Text-to-speech functionality
+   - Voice input support
+   - Suggested questions
+
+5. Safety and Compliance
+   - Clear medical advice disclaimers
+   - Professional consultation recommendations
+   - Privacy-focused design
+   - Secure API key management
+
+Technical Architecture
+--------------------
+1. Frontend
+   - React/TypeScript for UI components
+   - Tailwind CSS for styling
+   - Responsive design
+   - Real-time chat interface
+   - Voice input/output integration
+
+2. Backend
+   - Astro framework
+   - TypeScript for type safety
+   - RESTful API endpoints
+   - Environment-based configuration
+   - Error handling and logging
+
+3. AI Integration
+   - OpenAI API integration
+   - Google Gemini API integration
+   - Together AI API integration
+   - Fallback mechanism
+   - Response parsing and formatting
+
+4. Data Flow
+   User Input → API Endpoint → AI Processing → X-AI Analysis → Response Formatting → User Output
+
+Build Path
+---------
+1. Development Setup
+   - Node.js environment
+   - TypeScript configuration
+   - Environment variables setup
+   - API key configuration
+
+2. Dependencies
+   - React
+   - TypeScript
+   - Tailwind CSS
+   - OpenAI SDK
+   - Google AI SDK
+   - Astro framework
+
+3. API Integration
+   - OpenAI API key
+   - Google Gemini API key
+   - Together AI API key
+   - Environment variable configuration
+
+4. Deployment
+   - Vercel deployment
+   - Environment variable setup
+   - API endpoint configuration
+   - SSL/TLS security
+
+Security Considerations
+---------------------
+1. API Key Protection
+   - Environment variable usage
+   - Secure key storage
+   - Access control
+
+2. Data Privacy
+   - No persistent storage of medical data
+   - Secure communication
+   - User data protection
+
+3. Medical Information
+   - Clear disclaimers
+   - Professional consultation recommendations
+   - Evidence-based responses
+
+Future Enhancements
+-----------------
+1. Planned Features
+   - Enhanced symptom analysis
+   - Medical image analysis
+   - Medication interaction checking
+   - Appointment scheduling
+   - Integration with healthcare providers
+
+2. Technical Improvements
+   - Enhanced error handling
+   - Improved response caching
+   - Better fallback mechanisms
+   - Advanced X-AI capabilities
+
+3. User Experience
+   - More intuitive interface
+   - Enhanced voice capabilities
+   - Better mobile responsiveness
+   - Additional language support
+
+Note: This project is designed to provide general health information and should not be used as a substitute for professional medical advice. Always consult healthcare professionals for diagnosis and treatment. 

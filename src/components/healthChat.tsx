@@ -1,20 +1,23 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Mic, MicOff, Loader2 } from "lucide-react";
+import { Send, Mic, MicOff, Loader2, Volume2 } from "lucide-react";
+import { Message } from "../types/chat";
+import { speakText } from "../utils/textToSpeech";
+import { enhanceHealthChatResponse } from "../utils/xai";
 declare global {
   interface Window {
     SpeechRecognition?: any;
     webkitSpeechRecognition?: any;    
   }
 }
-interface Message {
-  id: string;
-  content: string;
-  sender: "user" | "assistant";
-  timestamp: Date;
-}
+
 interface HealthChatProps {
-  userSettings: any;
-  selectedClarity: { id: string; label: string };
+  userSettings: {
+    sex: string;
+    conditions: string[];
+    age: { range: string };
+    language: { name: string };
+  };
+  selectedClarity: { label: string };
 }
 
 export default function HealthChat({ userSettings, selectedClarity }: HealthChatProps) {
@@ -85,7 +88,7 @@ export default function HealthChat({ userSettings, selectedClarity }: HealthChat
 
       const data = await response.json();
 
-      // Add assistant response
+      // Create assistant message
       const assistantMessage: Message = {
         id: Date.now().toString() + "-assistant",
         content: data.response || "I apologize, but I couldn't process your request. Please try again.",
@@ -93,10 +96,14 @@ export default function HealthChat({ userSettings, selectedClarity }: HealthChat
         timestamp: new Date(),
       };
 
-      setMessages((prev) => [...prev, assistantMessage]);
-    
+      // If we have X-AI data, enhance the message
+      if (data.xaiData) {
+        const enhancedMessage = enhanceHealthChatResponse(assistantMessage, data.xaiData);
+        setMessages((prev) => [...prev, enhancedMessage]);
+      } else {
+        setMessages((prev) => [...prev, assistantMessage]);
+      }
     } catch (error) {
-      // Handle error
       const errorMessage: Message = {
         id: Date.now().toString() + "-error",
         content: "I'm sorry, I encountered an error processing your request. Please try again.",
@@ -155,6 +162,15 @@ export default function HealthChat({ userSettings, selectedClarity }: HealthChat
     }
   };
 
+  const handleSpeak = (text: string) => {
+    speakText(text, {
+      rate: 0.9,
+      pitch: 1,
+      languageCode: "en-US",
+      languageName: "English",
+    });
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col h-[600px]">
       <div className="flex items-center justify-between mb-4 pb-3 border-b">
@@ -195,7 +211,18 @@ export default function HealthChat({ userSettings, selectedClarity }: HealthChat
                   : "bg-gray-100 text-gray-800"
               }`}
             >
-              <p className="text-sm">{message.content}</p>
+              <div className="flex items-start justify-between gap-2">
+                <div className="whitespace-pre-wrap">{message.content}</div>
+                {message.sender === "assistant" && (
+                  <button
+                    onClick={() => handleSpeak(message.content)}
+                    className="p-1 rounded-full hover:bg-gray-200 flex-shrink-0"
+                    title="Text to speech"
+                  >
+                    <Volume2 className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
               <p className="text-xs text-right mt-1 opacity-70">
                 {message.timestamp.toLocaleTimeString([], {
                   hour: "2-digit",

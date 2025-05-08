@@ -1,8 +1,9 @@
-import { clsx, type ClassValue } from "clsx";
+import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import type { UserSettings } from "@/components/settings/options";
-import { defaultSettings } from "@/components/settings/options";
-import { clarityLevels } from "@/components/settings/options";
+import type { UserSettings } from "../components/settings/options";
+import { defaultSettings } from "../components/settings/options";
+import { clarityLevels } from "../components/settings/options";
+import { medicalConditions } from "../components/settings/options";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
